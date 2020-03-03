@@ -2,6 +2,7 @@
 from selenium import webdriver
 from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.utils.translation import activate
 
 class HomeNewVisitorTest(StaticLiveServerTestCase):
 
