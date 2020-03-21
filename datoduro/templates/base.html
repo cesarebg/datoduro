@@ -8,10 +8,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block head_title %}{% endblock %}</title>
+        <title>{{ page.title }}</title>
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+            <script src="https://kit.fontawesome.com/929dd8246e.js" crossorigin="anonymous"></script>
         <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
 
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -23,6 +24,14 @@
         </style>
         <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"> -->
+
+         <!-- <link href="https://fonts.googleapis.com/css?family=Heebo:700&display=swap" rel="stylesheet"> -->
+         <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Merriweather:900&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Heebo:900&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Roboto:900&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700,700i&display=swap" rel="stylesheet">
 
         <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
         {% block head_css %}{% endblock %}
@@ -33,40 +42,67 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 {% block navbar %}
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{{ page.title }}</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+<nav class="navbar navbar-expand-md fixed-top navbar-dark">
+  <div class="container mx-auto">
+  <a class="navbar-brand" href="{{ page.get_parent.url }}">Dato>Duro_</a>
+  <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Noticias <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Opinión</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Fact-Check</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">Política</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Economía</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">En vivo</a>
+      </li>
+      <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fab fa-twitter-square"></i></a>
+      </li>
+      <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fab fa-facebook-square"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fab fa-github-square"></i></a>
+      </li>
+
+
+    </ul>
+  </div>
+  </div>
+</nav>
 {% endblock %}
 
 <!-- Jumbotron and Container cut and pasted in index.html -->
 {% block content %}{% endblock %}
 
-      <hr>
 
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
+      <!-- <footer class="container-fluid fixed-bottom text-light bg-dark">
+        <div class="row">
+  <div class="col-sm">
+    One of three columns
+  </div>
+  <div class="col-sm">
+    One of three columns
+  </div>
+  <div class="col-sm">
+    One of three columns
+  </div>
+</div>
+        <p>&copy; DatoDuro 2020</p>
+      </footer> -->
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
@@ -83,7 +119,6 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-        1
 
 {% block footer_javascript %}{% endblock %}
     </body>

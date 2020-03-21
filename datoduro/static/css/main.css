@@ -7,3 +7,119 @@
 .jumbotron h1 {
   color: rgba(200, 50, 255, 1);
 }
+
+.navbar-brand {
+  font-family: 'Roboto Mono', monospace;
+  /* color: white; */
+  /* font-size: 25px; */
+}
+
+.navbar-dark .navbar-nav .active > .nav-link {
+  font-family: 'Roboto Mono', monospace;
+  /* color: white;
+  font-size: 18px; */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  font-family: 'Roboto Mono', monospace;
+  /* color: #a4f644;
+  font-size: 18px; */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-family: 'Roboto Mono', monospace;
+  /* font-size: 18px; */
+}
+
+.navbar {
+  background-color: black;
+}
+
+.navbar-inverse .navbar-brand {
+  /* color: white; */
+}
+
+.container {
+  font-family: 'Roboto Mono', monospace;
+}
+
+h1 a {
+  font-family: 'Roboto', monospace;
+  color: black;
+}
+
+h1 {
+  font-family: 'Gothic A1', sans-serif;
+  color: black;
+}
+
+h5 {
+  font-family: 'Roboto Mono', monospace;
+}
+
+body
+{
+    background-color: rgb(247, 247, 247); /* The page background will be black */
+}
+
+.card-body {
+  border-width:3px !important;
+  border-color: black !important;
+}
+
+.border-top {
+  border-top: 4px solid black !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black !important;
+}
+
+element {
+
+}
+.text-muted {
+
+    color: black !important;
+
+}
+
+.fa-twitter::before {
+    background-color: dodgerblue;
+    padding: 7px;
+    color: white;
+    margin: 0px;
+}
+
+.fa-facebook-f::before {
+    background-color: #3b5998;
+    padding: 7px 10px 7px 10px;
+    color: white;
+    margin: 0px;
+}
+
+.fa-whatsapp::before  {
+    background-color: #25D366;
+    padding: 7px;
+    color: white;
+    margin: 0px;
+}
+
+.fa-link::before  {
+  background-color: black;
+  padding: 7px;
+  color: white;
+  margin: 0px;
+}
+
+.fa-twitter-square {
+  font-size: 25px;
+}
+
+.fa-facebook-square {
+  font-size: 25px;
+}
+
+.fa-github-square {
+  font-size: 26px;
+}

@@ -1,18 +1,152 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
 
+    <!-- <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.intro|richtext }}</div> -->
+
+<div class="container mx-auto">
+
+  <!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-white mt-4 rounded-0">
+      <li class="breadcrumb-item active"><a href="#" class="text-dark">PRINCIPAL</a></li>
+    </ol>
+  </nav> -->
+
+<div class="row">
+  <div class="col-md-8">
+    {% for post in blogpages %}
+     {% with post=post.specific %}
+      {% if post.category == 'Opinion' %}
+    <div class="card my-4 border-0 rounded-0">
+      <!-- <div class="row no-gutters"> -->
+        <!-- <div class="col-sm-6"> -->
+        <!-- </div> -->
+        <!-- <div class="col-sm-6"> -->
+
+          <div class="card-body border-top bg-warning">
+              <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
+            --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl post %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
+            --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
+            --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl post %}')"><i class="fas fa-link"></i></a>
+
+            <h1 class="card-title pt-4"><a href="http://127.0.0.1:8000{% pageurl post %}">{{ post.title }}</a></h1>
+            <p class="card-text text-dark"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
+
+              <p class="card-text">{{ post.intro }}</p>
+            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+          </div>
+          <!-- {% with post.main_image as main_image %}
+              {% if main_image %}{% image post.main_image fill-730x487 class="card-img border-0 rounded-0" %}{% endif %}
+          {% endwith %} -->
+          {% image post.main_image original as card_image %}
+          <!-- <img src="{% static 'img/IMG_9986.jpg' %}" class="card-img border-0 rounded-0" alt="..."> -->
+          <figcaption class="figure-caption text-right bg-warning"><small class="text-muted">{{ post.caption_image }}</small></figcaption>
+          <img src="{{ card_image.url }}" class="card-img border-0 rounded-0">
+
+        </div>
+        {% elif post.category == 'Story' %}
+
+        <div class="card my-4 border-0 rounded-0">
+          <!-- <div class="row no-gutters"> -->
+            <!-- <div class="col-sm-6"> -->
+            <!-- </div> -->
+            <!-- <div class="col-sm-6"> -->
+              <div class="card-body border-top bg-danger">
+
+                <a href="#"><i class="fab fa-twitter"></i></a><!--
+                --><a href="#"><i class="fab fa-facebook-f"></i></a><!--
+                --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000/{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
+                --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl post %}')"><i class="fas fa-link"></i></a>
+                
+
+                <h1 class="card-title pt-4"><a href="{% pageurl post %}">{{ post.title }}</a></h1>
+                <p class="card-text"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
+                  <!-- <p class="card-text">{{ post.intro }}</p> -->
+                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+
+
+              <!-- {% with post.main_image as main_image %}
+                  {% if main_image %}{% image post.main_image fill-730x487 class="card-img border-0 rounded-0" %}{% endif %}
+              {% endwith %} -->
+              {% image post.main_image original as card_image %}
+              <!-- <img src="{% static 'img/IMG_9986.jpg' %}" class="card-img border-0 rounded-0" alt="..."> -->
+              <figcaption class="figure-caption text-right"><small class="text-muted">{{ post.caption_image }}</small></figcaption>
+              <img src="{{ card_image.url }}" class="card-img border-0 rounded-0">
+              <p class="card-text mt-3">{{ post.intro }}</p>
+            </div>
+            </div>
+
+        {% else %}
+        <div class="card my-4 border-0 rounded-0">
+          <!-- <div class="row no-gutters"> -->
+            <!-- <div class="col-sm-6"> -->
+            <!-- </div> -->
+            <!-- <div class="col-sm-6"> -->
+              <div class="card-body border-top">
+                <a href="#"><i class="fab fa-twitter"></i></a><!--
+                --><a href="#"><i class="fab fa-facebook-f"></i></a><!--
+                --><a href="#"><i class="fab fa-whatsapp"></i></a><!--
+                --><a href="#"><i class="fas fa-link"></i></a>
+                
+                <h1 class="card-title pt-4"><a href="{% pageurl post %}">{{ post.title }}</a></h1>
+                <p class="card-text"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
+
+                  <p class="card-text">{{ post.intro }}</p>
+                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+              </div>
+              <!-- {% with post.main_image as main_image %}
+                  {% if main_image %}{% image post.main_image fill-730x487 class="card-img border-0 rounded-0" %}{% endif %}
+              {% endwith %} -->
+              {% image post.main_image original as card_image %}
+              <!-- <img src="{% static 'img/IMG_9986.jpg' %}" class="card-img border-0 rounded-0" alt="..."> -->
+              <img src="{{ card_image.url }}" class="card-img border-0 rounded-0">
+            </div>
+            {% endif %}
+
+        {% endwith %}
+      {% endfor %}
+        </div>
+        <div class="col-md-4">
+        <!-- <div class="card my-4 bg-dark text-white">
+  <img src="{% static 'img/sample-cam.jpg' %}" class="card-img" alt="...">
+  <div class="card-img-overlay">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text">Last updated 3 mins ago</p>
+  </div>
+</div> -->
+
+</div>
+
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+
+<!-- <p class="card-text"><small class="text-muted">ÚLTIMAS</small></p>
+<div class="row bg-dark">
     {% for post in page.get_children %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-        {{ post.specific.intro }}
-        {{ post.specific.body|richtext }}
-    {% endfor %}
+    <div class="col-md-3">
+    <div class="card border-0">
+  <!-- <img class="card-img-top" src="{% static 'img/sample-cam.jpg' %}" alt="Card image cap"> -->
+  <!-- <div class="card-body bg-dark">
+    <p class="card-text"><small class="text-muted">12:00 pm</small></p>
+    <h5 class="card-title"><a href="{% pageurl post %}" class="text-light">{{ post.title }}</a></h5> -->
+    <!-- <p class="card-text">{{ post.specific.intro }}</p> -->
+  <!-- </div> -->
+</div>
+<!-- </div> -->
+    <!-- {% endfor %} -->
+
+<!-- </div>
+</div> -->
 
 {% endblock %}
