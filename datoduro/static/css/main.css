@@ -41,6 +41,7 @@
 
 .container {
   font-family: 'Roboto Mono', monospace;
+  padding: 0px;
 }
 
 h1 a {
@@ -123,3 +124,4 @@ element {
 .fa-github-square {
   font-size: 26px;
 }
+

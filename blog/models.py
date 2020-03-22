@@ -37,7 +37,7 @@ class BlogPage(Page):
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
     category = models.CharField(max_length=7, choices=CATEGORIES, default="Blog")
-
+    topic = models.CharField(max_length=20, null = True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -63,6 +63,7 @@ class BlogPage(Page):
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
         FieldPanel('category'),
+        FieldPanel('topic'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
 

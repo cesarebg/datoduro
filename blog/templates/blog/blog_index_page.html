@@ -33,11 +33,13 @@
         <!-- <div class="col-sm-6"> -->
 
           <div class="card-body border-top bg-warning">
+            <div class="container clearfix">
               <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
             --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl post %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
             --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
             --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl post %}')"><i class="fas fa-link"></i></a>
-
+            <p class="float-right topic">> {{ post.topic }}</p>
+          </div>
             <h1 class="card-title pt-4"><a href="http://127.0.0.1:8000{% pageurl post %}">{{ post.title }}</a></h1>
             <p class="card-text text-dark"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
 
@@ -62,10 +64,13 @@
             <!-- <div class="col-sm-6"> -->
               <div class="card-body border-top bg-danger">
 
-                <a href="#"><i class="fab fa-twitter"></i></a><!--
-                --><a href="#"><i class="fab fa-facebook-f"></i></a><!--
-                --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000/{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
+                <div class="container clearfix">
+                  <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
+                --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl post %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
+                --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
                 --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl post %}')"><i class="fas fa-link"></i></a>
+                <p class="float-right topic">> {{ post.topic }}</p>
+              </div>
                 
 
                 <h1 class="card-title pt-4"><a href="{% pageurl post %}">{{ post.title }}</a></h1>
@@ -92,10 +97,13 @@
             <!-- </div> -->
             <!-- <div class="col-sm-6"> -->
               <div class="card-body border-top">
-                <a href="#"><i class="fab fa-twitter"></i></a><!--
-                --><a href="#"><i class="fab fa-facebook-f"></i></a><!--
-                --><a href="#"><i class="fab fa-whatsapp"></i></a><!--
-                --><a href="#"><i class="fas fa-link"></i></a>
+                <div class="container clearfix">
+                  <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
+                --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl post %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
+                --><a href="whatsapp://send" data-text="{{ post.title }}" data-href="http://127.0.0.1:8000{% pageurl post %}"><i class="fab fa-whatsapp"></i></a><!--
+                --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl post %}')"><i class="fas fa-link"></i></a>
+                <p class="float-right">> {{ post.topic }}</p>
+              </div>
                 
                 <h1 class="card-title pt-4"><a href="{% pageurl post %}">{{ post.title }}</a></h1>
                 <p class="card-text"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
