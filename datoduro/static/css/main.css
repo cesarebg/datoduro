@@ -49,9 +49,27 @@ h1 a {
   color: black;
 }
 
+@media (max-width: 575.98px) {
+  h1 a {
+    font-size: 32px;
+  }
+  #blog-page-content, #blog-page-social {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
 h1 {
-  font-family: 'Gothic A1', sans-serif;
+  font-family: 'Roboto', monospace;
   color: black;
+}
+
+@media (max-width: 575.98px) {
+  h1 {
+    font-size: 32px;
+    /* padding-left: 15px;
+    padding-right: 15px; */
+  }
 }
 
 h5 {
@@ -125,3 +143,7 @@ element {
   font-size: 26px;
 }
 
+#blog-page-topic {
+  white-space: nowrap;
+  margin: 10px;
+}
