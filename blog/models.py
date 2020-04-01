@@ -3,7 +3,7 @@ from django.db import models
 # New imports added for ParentalKey, Orderable, InlinePanel, ImageChooserPanel
 
 from modelcluster.fields import ParentalKey
-
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
@@ -19,10 +19,20 @@ class BlogIndexPage(Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
-        context['blogpages'] = blogpages
+        paginator = Paginator(blogpages, 3)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['blogpages'] = posts
         return context
 
-    content_panels = Page.content_panels + [
+        content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
 
@@ -38,6 +48,7 @@ class BlogPage(Page):
     body = RichTextField(blank=True)
     category = models.CharField(max_length=7, choices=CATEGORIES, default="Blog")
     topic = models.CharField(max_length=20, null = True)
+    paginate_by = 3
 
     def main_image(self):
         gallery_item = self.gallery_images.first()

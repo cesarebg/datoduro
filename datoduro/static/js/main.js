@@ -56,3 +56,7 @@ function data_story_menu(){
 data_story_menu()
 
 // Infinite scroll
+
+var infinite = new Waypoint.Infinite({
+  element: $('.infinite-container')[0]
+});

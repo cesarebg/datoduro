@@ -92,12 +92,16 @@
 
       {% endwith %}
       {% endfor %}
+
+      {% if blogpages.has_next %}
+        <a class="infinite-more-link" href="?page={{ blogpages.next_page_number }}">More</a>
+      {% endif %}
     </div>
 
 
-    {% if page_obj.has_next %}
+    <!-- {% if blogpages.has_next %}
       <a class="infinite-more-link" href="?page={{ articles.next_page_number }}">More</a>
-    {% endif %}
+    {% endif %} -->
 
     <div class="col-md-4">
 
