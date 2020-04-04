@@ -29,7 +29,6 @@ class BlogIndexPage(Page):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
 
-
         context['blogpages'] = posts
         return context
 
@@ -87,10 +86,35 @@ class OpinionIndexPage(Page):
         FieldPanel('intro', classname="full")
     ]
 
+class DataIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        blogpages = BlogPage.objects.live().order_by('-first_published_at')
+        paginator = Paginator(blogpages, 5)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+
+        context['blogpages'] = posts
+        return context
+
+        content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
 class BlogPage(Page):
     CATEGORIES = (
         ('News', 'News Post'),
-        ('Story', 'Data Story'),
+        ('Data', 'Data Story'),
         ('Opinion', 'Opinion'),
         ('Fact', 'Fact check')
     )
