@@ -42,7 +42,7 @@
       <!-- OPINION CARD -->
 
       <div class="card my-4 border-0 rounded-0 infinite-item" id="opinion-card">
-        <div class="card-body border-top bg-warning">
+        <div class="card-body border-top bg-warning" id="opinion-card-bg">
           <div class="container clearfix">
             <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
             --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl post %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
@@ -50,14 +50,14 @@
             --><a href="#" onclick="copy_to_clipboard('http://127.0.0.1:8000{% pageurl post %}')"><i class="fas fa-link"></i></a>
             <p class="float-right topic"><i class="fas fa-caret-right"></i> {{ post.topic }}</p>
           </div>
-          <h1 class="card-title pt-4"><a href="http://127.0.0.1:8000{% pageurl post %}">{{ post.title }}</a></h1>
-          <p class="card-text text-dark"><small class="text-muted">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
+          <h1 class="card-title pt-4"><a href="http://127.0.0.1:8000{% pageurl post %}" id="opinion-text-color">{{ post.title }}</a></h1>
+          <p class="card-text"><small class="text-muted" id="opinion-text-color">{{ post.date|date:'d-M-Y H:i e' }}</small></p>
 
           <p class="card-text">{{ post.intro }}</p>
         </div>
 
         {% image post.main_image original as card_image %}
-        <figcaption class="figure-caption text-right bg-warning"><small class="text-muted">{{ post.caption_image }}</small></figcaption>
+        <figcaption class="figure-caption text-right bg-warning" id="fig-caption-bg"><small class="text-muted">{{ post.caption_image }}</small></figcaption>
         <img src="{{ card_image.url }}" class="card-img border-0 rounded-0">
 
       </div>

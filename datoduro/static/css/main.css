@@ -108,20 +108,10 @@ textarea {
   /* font-size: 25px; */
 }
 
-.navbar-dark .navbar-nav .active > .nav-link {
-  font-family: 'Roboto Mono', monospace;
-  /* color: white;
-  font-size: 18px; */
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-  font-family: 'Roboto Mono', monospace;
-  /* color: #a4f644;
-  font-size: 18px; */
-}
 
 .navbar-dark .navbar-nav .nav-link {
   font-family: 'Roboto Mono', monospace;
+  color: white;
   /* font-size: 18px; */
 }
 
@@ -139,7 +129,7 @@ textarea {
 }
 
 h1 a {
-  font-family: 'Merriweather', serif;
+  font-family: 'Heebo', sans-serif;
   color: black;
 }
 
@@ -154,9 +144,9 @@ h1 a {
 }
 
 h1 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Heebo', sans-serif;
   font-weight: 900;
-  color: black;
+  /* color: white; */
 }
 
 @media (max-width: 575.98px) {
@@ -193,9 +183,7 @@ element {
 
 }
 .text-muted {
-
     color: black !important;
-
 }
 
 .fa-twitter::before {
@@ -246,7 +234,39 @@ element {
 .rich-text {
   font-family: 'Merriweather', serif;
   font-size: 18px;
+  line-height: 1.8;
 }
+
+/*-----FOOTER-----*/
+
+footer {
+  width: 100%;
+  background-color: black;
+  padding: 60px 0px;
+}
+
+footer nav ul li {
+  margin-left: 20px;
+  list-style: none;
+}
+
+footer nav ul li a {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+  line-height: 3;
+}
+
+footer nav ul li a:hover {
+  color: rgb(207, 207, 207);
+  text-decoration: none;
+}
+
+#opinion-card-bg, #fig-caption-bg, #opinion-text-color, #opinion-text-color{
+  background-color: rgb(255, 195, 54) !important;
+}
+
 
 /* ==========================================================================
    Helper classes
