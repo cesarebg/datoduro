@@ -54,6 +54,8 @@ settings.ini
 *.log
 local_settings.py
 db.sqlite3
+development.py
+testing.py
 
 # Distribution / packaging #
 ######################
