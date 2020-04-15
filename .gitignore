@@ -39,6 +39,8 @@ Thumbs.db
 
 # Environments #
 ######################
+settings.env
+*.env
 .env
 .venv
 env/
