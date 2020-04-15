@@ -263,9 +263,22 @@ footer nav ul li a:hover {
   text-decoration: none;
 }
 
-#opinion-card-bg, #fig-caption-bg, #opinion-text-color, #opinion-text-color{
+#opinion-card-bg, #fig-caption-bg, #opinion-text-color, #opinion-text-color {
   background-color: rgb(255, 195, 54) !important;
 }
+
+p.card-text.mt-3 {
+  color: black;
+}
+
+#data-card-bg {
+  background-color: rgb(17, 217, 164);
+}
+
+#fact-card-bg {
+  background-color: rgb(255, 78, 54);
+}
+
 
 
 /* ==========================================================================
