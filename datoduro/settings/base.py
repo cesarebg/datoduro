@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #         error_msg = "Set the %s environment variable" % var_name
 #         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # def get_env_variable(var_name):
 #     try:
