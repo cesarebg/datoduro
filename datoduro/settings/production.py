@@ -3,7 +3,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["167.172.205.131", "datoduro.com.mx", 'localhost']
+ALLOWED_HOSTS = ["www.datoduro.com.mx", "167.172.205.131"]
 
 DATABASES = {
     'default': {
