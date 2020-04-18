@@ -39,6 +39,19 @@ ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = config('SECRET_KEY')
 
+DEBUG = False
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DATABASE_NAME"),
+        'USER': config("DATABASE_USER"),
+        'PASSWORD': config("DATABASE_PASSWORD"),
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
 # def get_env_variable(var_name):
 #     try:
 #         return os.environ[var_name]
