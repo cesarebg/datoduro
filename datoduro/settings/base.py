@@ -39,7 +39,7 @@ ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
 
 DATABASES = {
     'default': {
