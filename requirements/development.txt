@@ -18,7 +18,7 @@ Jinja2==2.11.1
 l18n==2018.5
 MarkupSafe==1.1.1
 packaging==20.1
-Pillow==6.2.2
+Pillow==9.0.0
 psycopg2==2.8.2
 psycopg2-binary==2.8.2
 Pygments==2.5.2
