@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$', home_files, name='home-files'),
     # url(r'^$', home, name='home'),
     # path('admin/', admin.site.urls),
-    re_path(r'^cms/', include(wagtailadmin_urls)),
-    re_path(r'^documents/', include(wagtaildocs_urls)),
-    re_path(r'', include(wagtail_urls)),
+    path('cms/', include(wagtailadmin_urls)),
+    path('documents/', include(wagtaildocs_urls)),
+    path('', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
