@@ -96,8 +96,22 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'blog',
-    'dashboard'
+    'dashboard',
+    'terror',
+    'leaflet',
 ]
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (48.8, 2.4),
+    'SCROLLWHEELZOOM': False,
+    'DEFAULT_ZOOM': 2,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+    'SCALE': None,
+    'MINIMAP': False,
+    'RESET_VIEW': False,
+    'ZOOMCONTROL': False,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

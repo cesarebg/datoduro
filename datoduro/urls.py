@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$', home_files, name='home-files'),
     # url(r'^$', home, name='home'),
     # path('admin/', admin.site.urls),
+    path('terrorism/', include('terror.urls')),
     path('brexit-dashboard/', include('dashboard.urls')),
     path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
