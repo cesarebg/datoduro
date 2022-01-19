@@ -1,0 +1,134 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <link rel="stylesheet" href="{% static 'newsapp/style.css' %}" type="text/css">
+    <title>Violence detection dashboard</title>
+    <link href="{% static 'newsapp/nv.d3.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="{% static 'newsapp/nv.d3.js' %}"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="{% static 'newsapp/nv.d3.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+</head>
+<body>
+    <header class="topnav">Violence detection dashboard
+    </header>
+    <h2 id="main-data-bar"></h2>
+    <h2>
+          <div>
+            <form id="country_select">
+              <select id="country">
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Algeria">Algeria</option>
+                <option value="Austria">Austria</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Cyprus">Cyprus</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Egypt">Egypt</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Greece">Greece</option>
+                <option value="Iceland">Iceland</option>
+                <option value="India">India</option>
+                <option value="Iran">Iran</option>
+                <option value="Iraq">Iraq</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Israel">Israel</option>
+                <option value="Italy">Italy</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Lebanon">Lebanon</option>
+                <option value="Libya">Libya</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Malta">Malta</option>
+                <option value="Morocco">Morocco</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Norway">Norway</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Spain">Spain</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Syria">Syria</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Turkey">Turkey</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+                <option value="West Bank and Gaza Strip">West Bank and Gaza Strip</option>
+                <option value="Western Sahara">Western Sahara</option>
+                <option value="Yemen">Yemen</option>
+                        </select>
+            </form>
+        </h2>
+    <section class="charts-D3">
+        <h2 id="headline">Attacks, victims and the injured </h2>
+        <section class="chart-1">
+            <div class="chart1" id="chart1">
+                <svg></svg>
+            </div>
+            <div class="text-chart1" id="text-chart1">
+                <p class="text-chart1"></p>
+            </div>
+        </section>
+        <h2>Injured: </h2>
+        <section class="chart-2" id="chart2">
+            <div class="text-chart2" id="text-chart2">
+                <p class="text-chart"></p>
+            </div>
+            <div class="chart2" id="chart2">
+                <svg></svg>
+            </div>
+        </section>
+        <h2>International and domestic attacks: </h2>
+        <section class="chart-3">
+            <div class="chart3" id="chart3">
+                <svg></svg>
+            </div>
+            <div class="text-chart3" id="text-chart3">
+                <p class="text-chart"></p>
+            </div>
+        </section>
+    </section>
+    <h3 class="banner"><a href="../">Click here read the story</a></h2>
+    <footer>Cardiff University 2017</footer>
+    <script type="text/javascript">
+    var data_int = JSON.parse('{{ att_int|safe }}');
+    var dashboard_data = JSON.parse('{{ dash_data|safe }}');
+    var int_west = JSON.parse('{{ int_west_eur|safe }}');
+    var data_region = JSON.parse('{{ att_reg|safe }}');
+    var data_country = JSON.parse('{{ att_coun|safe }}');
+    var json_groupRegion = JSON.parse('{{ group_region|safe}}');
+    var json_groupCountry = JSON.parse('{{ group_country|safe }}');
+    var geojson = JSON.parse('{{ geojson_data|safe }}');
+    var aid_data = JSON.parse('{{ aid_count|safe }}')
+    var jsonString = JSON.stringify(int_dom_log)
+    console.log(jsonString)
+    var int_dom_log = JSON.parse('{{ int_dom_country|safe }}')
+    var jsonString = JSON.stringify(int_dom_log)
+    var geoNotJson = geojson.features;
+    var older_attacks = JSON.parse( '{{ total_old|safe }}' );
+    var recent_attacks = JSON.parse( '{{ total_new|safe }}' );
+    </script>
+</body>
+<script src="{% static 'newsapp/dashboard-chart.js' %}" type="text/javascript"></script>
+
+</html>

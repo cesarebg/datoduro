@@ -1,0 +1,317 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'newsapp/style.css' %}" type="text/css">
+    <title>Detail page</title>
+    <link href="{% static 'newsapp/nv.d3.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="{% static 'newsapp/nv.d3.js' %}"></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
+    <script src="{% static 'newsapp/jquery-3.2.0.min.js' %}"></script>
+
+<style>
+
+.map2 {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.map1 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+</head>
+<body>
+    <nav id="menu">
+
+      <a href=#>Hi</a>
+
+    </nav>
+
+    <div>
+
+      <div id='before' style='width:100%; height:100%'; class='map1'>
+      </div>
+      <div id='after' style='width:100%; height:100%'; class='map1'>
+    </div>
+
+    </div>
+
+</body>
+<script type="text/javascript">
+
+var bigFunction = function(state){
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWFxcGFsIiwiYSI6ImNpaXNoZ3U3dTAwOXN2dmtzNHN1aDA0NXAifQ.uCvg8IStM_uQhJfAJlBUcw';
+  var googleMapApi = "&key=AIzaSyDb2UWOvDm1A8FiV9v-53NjGehdB38FAEk"
+  var geoCodeCountryLookup = "https://maps.googleapis.com/maps/api/geocode/json?address="
+
+  var before = new mapboxgl.Map({
+      container: 'before',
+      style: 'mapbox://styles/mapbox/light-v9',
+      center: [-30.686,38.749],
+      attributionControl: true,
+      zoom: 1
+  });
+
+  before.scrollZoom.disable();
+  before.addControl(new mapboxgl.NavigationControl());
+
+  var after = new mapboxgl.Map({
+      container: 'after',
+      style: 'mapbox://styles/mapbox/light-v9',
+      center: [-30.686,38.749],
+      attributionControl: true,
+      zoom: 1
+  });
+  after.scrollZoom.disable();
+  after.addControl(new mapboxgl.NavigationControl());
+
+  var map = new mapboxgl.Compare(before, after, {
+      // mousemove: true
+  });
+
+    before.on('load', function () {
+      before.addSource('terror',{
+        type: 'geojson',
+        data: total_new
+      })
+      before.addLayer({
+        id: 'terror9',
+        source: 'terror',
+        type: 'circle',
+        layout: {
+            'visibility': 'visible'
+        },
+        paint: {
+          'circle-color': {
+            "property": state,
+            "type": "exponential",
+            "stops":[
+              [1, '#ffff00'],
+              [10, '#ffa500'],
+              [50, '#ff0000'],
+              [100, '#8b0000'],
+              [250, '#000000']
+            ]
+          },
+          'circle-opacity': {
+            "property": "total",
+            "type": "exponential",
+            "stops":[
+              [1, 0.3],
+              [5, 0.6],
+              [10, 0.7],
+              [20, 0.8],
+              [50, 1]
+            ]
+          }
+        },
+    });
+    });
+
+    after.on('load', function () {
+      after.addSource('terror',{
+        type: 'geojson',
+        data: total_old
+      })
+      after.addSource('cities',{
+        type: 'geojson',
+        data: geojson_total_city
+      })
+
+      after.addLayer({
+        id: 'afterterror1',
+        source: 'terror',
+        type: 'circle',
+        layout: {
+            'visibility': 'visible'
+        },
+        paint: {
+          'circle-color': {
+            "property": state,
+            "type": "exponential",
+            "stops":[
+              [1, '#ffff00'],
+              [10, '#ffa500'],
+              [50, '#ff0000'],
+              [100, '#8b0000'],
+              [250, '#000000']
+            ]
+          },
+          'circle-opacity': {
+            "property": "total",
+            "type": "exponential",
+            "stops":[
+              [1, 0.3],
+              [5, 0.6],
+              [10, 0.7],
+              [20, 0.8],
+              [50, 1]
+            ]
+          }
+        },
+      });
+      after.addLayer({
+        id: "city-circle",
+        source: "cities",
+        type: "circle",
+        paint: {
+          "circle-radius": 1
+        }
+      })
+    });
+
+
+    before.on('click', function (e) {
+        var features = before.queryRenderedFeatures(e.point, { layers: ['terror9'] });
+        if (!features.length) {
+            return;
+        }
+
+        var feature = features[0];
+
+        var popup = new mapboxgl.Popup()
+            .setLngLat(before.unproject(e.point))
+            .setHTML("Between 1970 and 1994,  " + feature.properties["domestic"] + " of attacks were domestic.\n " + feature.properties.international + " were international \n and " + feature.properties.unknown + " are by unknown motives." )
+            .addTo(before);
+    });
+
+    after.on('click', function (e) {
+        var features = after.queryRenderedFeatures(e.point, { layers: ['afterterror1'] });
+        if (!features.length) {
+            return;
+        }
+
+        var feature = features[0];
+
+        var popup = new mapboxgl.Popup()
+            .setLngLat(after.unproject(e.point))
+            .setHTML("Between 1994 and 2015,  " + feature.properties["domestic"] + " of attacks were domestic. " + feature.properties.international + " were international and " + feature.properties.unknown )            .addTo(after);
+    });
+
+    var toggleableLayerIds = [ 'terror9', 'afterterror1' ];
+
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+        var id = toggleableLayerIds[i];
+
+        var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'active';
+        link.textContent = id;
+
+        var link2 = document.createElement('a');
+        link.href = '#';
+        link.className = 'active';
+        link.textContent = id;
+
+        link.onclick = function (e) {
+            var clickedLayer = this.textContent;
+            e.preventDefault();
+            e.stopPropagation();
+
+        var visibility1 = before.getLayoutProperty('terror9', 'visibility');
+        // var visibility2 = after.getLayoutProperty('afterterror1', 'visibility');
+
+            if (visibility1 === 'visible') {
+                before.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                this.className = '';
+            }
+            else {
+                this.className = 'active';
+                before.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+                // after.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+            }
+        };
+
+        link2.onclick = function (e) {
+            var clickedLayer = this.textContent;
+            e.preventDefault();
+            e.stopPropagation();
+
+        // var visibility1 = before.getLayoutProperty('terror9', 'visibility');
+        var visibility2 = after.getLayoutProperty('afterterror1', 'visibility');
+
+            if (visibility2 === 'visible') {
+                after.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                this.className = '';
+            }
+            else {
+                this.className = 'active';
+                after.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        };
+
+    }
+
+    var layers = document.getElementById('menu');
+        layers.appendChild(link);
+        layers.appendChild(link2);
+
+};
+
+};
+
+//Change input of state of function to change what color on map should be based on
+bigFunction("intAndUnknown");
+
+// var visibility2 = after.getLayoutProperty('afterterror1', 'visibility');
+
+        // data
+        var total_country = JSON.parse( '{{ total_country|safe }}' );
+        //console.log(total_country);
+        var total_city = JSON.parse( '{{ total_city|safe }}');
+
+        var geojson_total_city = JSON.parse( '{{ geojson_city|safe }}');
+
+        //console.log(geojson_total_city);
+      //  console.log("Geocoded countries");
+
+
+        console.log("TOTAL PER TYPE OF ATTACK");
+        var older_attacks = JSON.parse( '{{ total_old|safe }}' );
+        console.log(older_attacks);
+        var recent_attacks = JSON.parse( '{{ total_new|safe }}' );
+        console.log(recent_attacks);
+
+        console.log(geojson_total_city);
+
+        var geojson_total_country = JSON.parse('{{ geojson_country|safe }}');
+        console.log(geojson_total_country);
+
+        var total_old = JSON.parse('{{total_old|safe}}');
+        console.log(total_old);
+        //Adds in element to JSON of international and Unknowns together
+        for (elem in total_old.features){
+          total_old.features[elem].properties.intAndUnknown = total_old.features[elem].properties.international + total_old.features[elem].properties.unknown;
+          total_old.features[elem].properties.total = total_old.features[elem].properties.international + total_old.features[elem].properties.unknown + total_old.features[elem].properties.domestic;
+        };
+
+        var total_new = JSON.parse('{{total_new|safe}}');
+        console.log(total_new);
+        //Adds in element to JSON of international and Unknowns together
+        for (elem in total_new.features){
+          total_new.features[elem].properties.intAndUnknown = total_new.features[elem].properties.international + total_new.features[elem].properties.unknown;
+          total_new.features[elem].properties.total = total_new.features[elem].properties.international + total_new.features[elem].properties.unknown + total_new.features[elem].properties.domestic;
+        };
+
+
+    </script>
+</body>
+</html>

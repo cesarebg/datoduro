@@ -1,0 +1,307 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <link rel="stylesheet" href="{% static 'newsapp/style.css' %}" type="text/css">
+    <title>Violence detection dashboard</title>
+    <link href="{% static 'newsapp/nv.d3.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="{% static 'newsapp/nv.d3.js' %}"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <link href="{% static 'newsapp/mapbox.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="{% static 'newsapp/nv.d3.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
+    <script src="{% static 'newsapp/jquery-3.2.0.min.js' %}"></script>
+</head>
+
+<body>
+  <header class="topnav">How did terrorism spread in two decades?
+    <p class="header-text">by Cesar Barboza, Mika Kozhakanova, Jure Štabuc, and Carwyn Williams<p>
+    </header>
+<h2>Extremism keeps a relationship with political instability and developed economies have not invested enough to address the issue.</h2>
+<section class = 'mapdisplay' id="trendMap">
+
+  <article class="results" id="mapResults">
+      <p>Map shows in which countries the attacks with an international logistic or unknown ideology.</p>
+      <p>
+        Regions with a darker tone suffered more attacks from violence generated outsider their borders. The shift is more clear in the last two decades, compared with preceeding years.
+      </p>
+      <div id="resultsForClicked">
+          <p>Click on each country to browse the precises figures.</p>
+        </div>
+  </article>
+  <div class="map-flex-container">
+    <div class="map-flex-container-2">
+  <div class="years-tag-1">1970-1994</div><div class="years-tag-2">1994-2015</div>
+</div>
+    <div class="map1">
+      <div id='before'>
+
+      </div>
+      <div id='after'>
+      </div>
+      <div class="legend">
+        Percentage International
+        <div class="circle" id="a">0-5%
+        </div>
+        <div class="circle" id="b">5-10%
+        </div>
+        <div class="circle" id="c">10-15%
+        </div>
+        <div class="circle" id="d">15-20%
+        </div>
+        <div class="circle" id="e">20-25%
+        </div>
+        <div class="circle" id="f">25-30%
+        </div>
+        <div class="circle" id="g">30-35%
+        </div>
+        <div class="circle" id="h">35-40%
+        </div>
+        <div class="circle" id="i">40%+
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+
+
+</section>
+  <h2 id="playBar">In 1994, domestic terror accounted for 14% of all terrorist attacks. But in 2015, that figured decreased down to 2%, according to the Global Terrorism Database (GTD). Consult the difference with attacks planned abroad.</h2>
+  <h2 id="totalBar"></h2>
+    <section class="map-overlay">
+        <div class='map-overlay-inner' id='map-overlay-playButton'>
+            <button type="button" id="playButton" style="inline-block">Play</button>
+            <br>
+            <br>
+            <div><h3>Year: </h3><h3 id="dateOf"></h3></div>
+        </div>
+
+        <div class='map-overlay-inner' id='map-overlay-year'>
+            <input id='slider' type='range' min='0' max='22' step='1' value='0' style="inline-block" />
+            <br>
+            <p>Browse terror attacks by year</p>
+            <br>
+            <label id='year'></label>
+          </div>
+        <div class='map-overlay-inner' id='map-overlay-searchBox'>
+          <select type="text" id="searchBox" class="input-medium search-query" style="inline-block"></select><br><br>
+          Search by country
+        </div>
+    </section>
+
+
+
+<section class="mapArea" id="searchMap">
+
+    <section class="mapdisplay">
+
+        <article class="results" id="mapResults">
+            <p>This map shows the spread of terrorist attacks in the US and Western Europe over more than two decades.</p>
+            <br>
+            <p>
+               The bigger the circle the higher the death count.
+            </p>
+            <div id="resultsWhenClicked">
+                <p>Click on an event to get more information of each attack</p>
+              </div>
+        </article>
+        </div>
+
+        <aside id='map'><div class="legend1">
+          <div class="circle" id="j">Domestic
+          </div>
+          <div class="circle" id="k">International
+          </div>
+          <div class="circle" id="l">Unknown
+          </div>
+          </div></aside>
+
+    </section>
+<section class="charts-D3">
+      <h2>Despite terrorism becoming a global problem, developed countries do not meet targets of foreign aid set by United Nations</h2>
+      <section class="chart-4" id="chart4">
+          <div class="text-chart4" id="text-chart4">
+              <p class="text-chart">Developed countries have not met the UN target of providing at least 0.7 per cent of their Gross National Income (GNI) in foreign aid. The United Kingdom just reach that objective since 2014, but most of DAC countries are below average.
+                  (Source: OECD)</p>
+          </div>
+          <div class="chart4">
+              <svg></svg>
+          </div>
+      </section>
+      <h2>The human cost of terrorism is alarming, select a country to compare.
+        <br>
+        <br>
+              <form id="country_select">
+                <select id="country">
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="Algeria">Algeria</option>
+                  <option value="Austria">Austria</option>
+                  <option value="Bahrain">Bahrain</option>
+                  <option value="Bangladesh">Bangladesh</option>
+                  <option value="Belgium">Belgium</option>
+                  <option value="Bhutan">Bhutan</option>
+                  <option value="Cyprus">Cyprus</option>
+                  <option value="Denmark">Denmark</option>
+                  <option value="Egypt">Egypt</option>
+                  <option value="Finland">Finland</option>
+                  <option value="France">France</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Greece">Greece</option>
+                  <option value="Iceland">Iceland</option>
+                  <option value="India">India</option>
+                  <option value="Iran">Iran</option>
+                  <option value="Iraq">Iraq</option>
+                  <option value="Ireland">Ireland</option>
+                  <option value="Israel">Israel</option>
+                  <option value="Italy">Italy</option>
+                  <option value="Jordan">Jordan</option>
+                  <option value="Kuwait">Kuwait</option>
+                  <option value="Lebanon">Lebanon</option>
+                  <option value="Libya">Libya</option>
+                  <option value="Maldives">Maldives</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Morocco">Morocco</option>
+                  <option value="Nepal">Nepal</option>
+                  <option value="Netherlands">Netherlands</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Portugal">Portugal</option>
+                  <option value="Qatar">Qatar</option>
+                  <option value="Saudi Arabia">Saudi Arabia</option>
+                  <option value="Spain">Spain</option>
+                  <option value="Sri Lanka">Sri Lanka</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Switzerland">Switzerland</option>
+                  <option value="Syria">Syria</option>
+                  <option value="Tunisia">Tunisia</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States">United States</option>
+                  <option value="West Bank and Gaza Strip">West Bank and Gaza Strip</option>
+                  <option value="Western Sahara">Western Sahara</option>
+                  <option value="Yemen">Yemen</option>
+                          </select>
+              </form>
+          </h2>
+      <section class="charts-D3">
+          <h2 id="headline">Attacks, victims and the injured </h2>
+          <section class="chart-5">
+              <div class="chart5" id="chart5">
+                  <svg></svg>
+              </div>
+              <div class="text-chart5" id="text-chart5">
+                  <p class="text-chart5"></p>
+              </div>
+          </section>
+
+
+
+
+    <!-- <h3 class="banner"><a href="results">Click here to browse the VIOLENCE DETECTION DASHBOARD</a></h2> -->
+</section>
+            <h2 class="title"><strong>Violence</strong> related to terrorism has <strong>intensified</strong> in the last five years. One of the probable causes is the <strong>climate of political instability</strong> in regions such as Middle East. Violence may be <strong>spilling over to Western Europe.</strong><br>IT IS A GLOBAL PROBLEM</h2>
+        <p class="text">Terrorism has changed its dynamics in the last few years. According to an analysis of the last two decades, the US and Western Europe –that include countries that have not met the agreements set by the United Nations concerning development aid– face a mayor threat by terrorist groups from abroad, a shift from preceding years when ethnic violent groups predominated.<br><br>Before
+            the first attack to the WTC in New York City in 1993, terrorism in the US and Western Europe was perpetrated mostly by organizations such as the IRA, ETA and the National Liberation Front of Corsica, among others, according to data from the
+            Global Terrorism Database.<br><br>In recent years, unidentified groups are responsible for the biggest share of the attacks. For some experts, this tendency has changed in the last years since some groups such as the Islamic State is claiming
+            responsibility of deadly and visible attacks, even if they do not plan and execute directly.<br><br> “The trend in unclaimed attacks has been decreasing and I think that is the result of two things: the first one is that in conflicts where
+            multiple groups are using terrorism, and there is one incentive for one group to claim it, because they want to distinguish themselves from another group”, says Kristian Gleditsch, researcher from the University of Essex and a a research associate
+            at the International Peace Research Institute, Oslo (PRIO).<br><br> “Another thing which is unusual recently like IS, is that unlike previous groups they are much more likely to claim attacks even if they not necessary plan it, so much of
+            the recent attacks recently of Western Europe, they were not planned by IS, but they are much motivated to claim responsibility for this attacks”, he added.<br><br> The most notorious attacks which responsability was claimed by organizations such as the IS in US and Western Union are generally linked to countries with a high political instability due to war, such as Afghanistan, Iraq and Syria. Those countries also have suffered the worst concequences of violence related to terrorism</p>
+    <section class="charts-D3">
+        <h2>Violence in Middle East & North Africa is spilling over</h2>
+        <section class="chart-1">
+            <div class="chart1" id="chart1">
+                <svg></svg>
+            </div>
+            <div class="text-chart1" id="text-chart1">
+                <p class="text-chart">Terrorism in Western Europe and the United States accounts for relatively small proportion of attacks worldwide. The most affected regions are Middle East & North Africa, as well as South Asia. Crisis in those regions may be spilling extremism in other regions. Source: GTD </p>
+            </div>
+        </section>
+        <h2>Western Europe not inmune from problems abroad</h2>
+        <section class="chart-2" id="chart2">
+            <div class="text-chart2" id="text-chart2">
+                <p class="text-chart">Data shows that Western Europe have registered an increase of cases in which a foreigner perpetrator carried out the attack. Countries from Western Europe such as the UK, France and Germany may be facing the spillovers of periods of inestability
+                    in other regions, such as the "Arab Spring", the occupation of Iraq, Afghanistan, as well as the recent crisis in Syria. Source GTD</p>
+            </div>
+            <div class="chart2">
+                <svg></svg>
+            </div>
+        </section>
+        <h2>Shift of terrorism in Europe</h2>
+        <section class="chart-3">
+            <div class="chart3" id="chart3">
+                <svg></svg>
+            </div>
+            <div class="text-chart3" id="text-chart3">
+                <p class="text-chart">Unidentified terrorist attacks account for most of the terrorist attacks in Western Europe countries. But terrorist organizations such as the IS are claimming more responsability of those attacks although they do not plan or execute them.</p>
+            </div>
+        </section>
+
+    </section>
+    <footer>Cardiff University 2017</footer>
+    <script type="text/javascript">
+        var data_int = JSON.parse('{{ att_int|safe }}');
+        var int_west = JSON.parse('{{ int_west_eur|safe }}');
+        var data_region = JSON.parse('{{ att_reg|safe }}');
+        var data_country = JSON.parse('{{att_coun|safe}}')
+        var geojson = JSON.parse('{{ geojson_data|safe }}');
+        var geoNotJson = geojson.features;
+        var older_attacks = JSON.parse( '{{ total_old|safe }}' );
+        var recent_attacks = JSON.parse( '{{ total_new|safe }}' );
+        var geoNotJson = geojson.features;
+        var aid_data = JSON.parse('{{ aid_count|safe }}')
+        var jsonString = JSON.stringify(aid_data)
+
+        var geojson_total_city = JSON.parse( '{{ geojson_city|safe }}');
+        var total_old = JSON.parse('{{ total_old|safe }}');
+
+        //Adds in element to JSON of international and Unknowns together
+        for (elem in total_old.features){
+          total_old.features[elem].properties.intAndUnknown = total_old.features[elem].properties.international + total_old.features[elem].properties.unknown;
+          total_old.features[elem].properties.total = total_old.features[elem].properties.international + total_old.features[elem].properties.unknown + total_old.features[elem].properties.domestic;
+          total_old.features[elem].properties.domesticPercent = Math.floor(total_old.features[elem].properties.domestic/(total_old.features[elem].properties.international + total_old.features[elem].properties.unknown + total_old.features[elem].properties.domestic)*100);
+          total_old.features[elem].properties.internationalPercent = Math.floor(total_old.features[elem].properties.international/(total_old.features[elem].properties.international + total_old.features[elem].properties.unknown + total_old.features[elem].properties.domestic)*100);
+        };
+
+        var total_new = JSON.parse('{{total_new|safe}}');
+
+        //Adds in element to JSON of international and Unknowns together
+        for (elem in total_new.features){
+          total_new.features[elem].properties.intAndUnknown = total_new.features[elem].properties.international + total_new.features[elem].properties.unknown;
+          total_new.features[elem].properties.total = total_new.features[elem].properties.international + total_new.features[elem].properties.unknown + total_new.features[elem].properties.domestic;
+          total_new.features[elem].properties.domesticPercent = Math.floor(total_new.features[elem].properties.domestic/(total_new.features[elem].properties.international + total_new.features[elem].properties.unknown + total_new.features[elem].properties.domestic)*100);
+          total_new.features[elem].properties.internationalPercent = Math.floor(total_new.features[elem].properties.international/(total_new.features[elem].properties.international + total_new.features[elem].properties.unknown + total_new.features[elem].properties.domestic)*100);
+        };
+
+        // var jsonString = JSON.stringify(aid_data)
+        // console.log(jsonString)
+        var geoNotJson = geojson.features;
+        var older_attacks = JSON.parse( '{{ total_old|safe }}' );
+        var recent_attacks = JSON.parse( '{{ total_new|safe }}' );
+        var all_regions_map = JSON.parse( '{{ all_regions|safe }}');
+          console.log("ALLLL");
+        console.log(all_regions_map)
+
+    </script>
+    <script src="{% static 'newsapp/story-chart-d3.js' %}" type="text/javascript"></script>
+    <script src="{% static 'newsapp/dashboard-chart.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'newsapp/circleColor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'newsapp/countryButton.js' %}"></script>
+    <script type="text/javascript" src="{% static 'newsapp/map.js' %}"></script>
+    <script type="text/javascript" src="{% static 'newsapp/compareMap.js'%}"></script>
+</body>
+
+</html>
