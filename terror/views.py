@@ -9,10 +9,10 @@ import json
 import geojson
 from .forms import locationselect
 
-data = pd.read_csv("terror/templates/terror/data_94_15_us_we_asia.csv", low_memory=False).fillna(0)
-data2 = pd.read_csv("terror/templates/terror/data_94_15_we_us.csv", low_memory=False).fillna(0)
+data = pd.read_csv("terror/templates/terror/data_94_15_us_we_asia.csv", low_memory=True).fillna(0)
+data2 = pd.read_csv("terror/templates/terror/data_94_15_we_us.csv", low_memory=True).fillna(0)
 data_aid = pd.read_csv("terror/templates/terror/DP_LIVE_G7.csv")
-war_data = pd.read_csv("terror/templates/terror/wars.csv", low_memory=False)
+war_data = pd.read_csv("terror/templates/terror/wars.csv", low_memory=True)
 filename = "terror/static/newsapp/dataset.js"
 filename2 = "terror/static/newsapp/dataset_cities.js"
 filename3 = "terror/static/newsapp/dataset_country.js"
