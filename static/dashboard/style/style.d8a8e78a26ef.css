@@ -1,0 +1,473 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(245, 249, 250);
+}
+
+/* Main visualisation */
+
+#vis_inflation, #vis_investment, #vis_trade, #vis_growth, #vis_debt, #vis_confidence, #vis_trade {
+  display: inline-block;
+  background: white;
+  margin: 350px 70px 0px 100px;
+  /*border-style: solid;
+  border-width: 1px;
+  border-color: rgb(226, 226, 226);*/
+  z-index: 1;
+}
+
+/* HEADER MAIN PAGE */
+
+header {
+  background-color: rgb(10, 35, 66);
+  box-shadow: 0px 0px 5px 0px #000000;
+}
+
+div.menu_icon {
+  display: inline-block;
+  margin: 15px;
+  float: left;
+  border-style: solid;
+  border-color: #E0E0E0;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+
+div.menu_icon #stripe {
+  margin: 3px 0;
+  width: 18px;
+  height: 3px;
+  background-color: white;
+}
+
+/*div.menu_icon:hover {
+  display: inline-block;
+  margin: 15px;
+  float: left;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(251, 15, 0);
+}*/
+
+header h1 {
+  font-size: 22px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  font-weight: 1000;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+/* NAVIGATION BAR */
+
+nav {
+  width: 0;
+  height: auto;
+  float: left;
+  background-color: rgb(1, 73, 144);
+  max-width: 225px;
+  transition: 0.5s;
+  overflow-x: hidden;
+  z-index: 1;
+}
+
+nav a {
+  display: block;
+  color: white;
+  text-align: left;
+  padding: 15px;
+  text-decoration: none;
+  font-family: 'Roboto Mono';
+  transition: 0.1s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background-color: rgb(255, 0, 0);
+  transition: 0.1s;
+}
+
+nav #close_menu {
+  display: block;
+  color: white;
+  text-align: right;
+  padding: 15px 15px 15px 15px;
+  text-decoration: none;
+  font-family: 'Roboto Mono';
+  transition: 0.1s;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  background: #a7c6eb;
+  margin-left: 90%;
+
+}
+
+nav #close_menu:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+#container {
+  position: absolute;
+  z-index: -1;
+}
+
+/* FORMS */
+
+.form-signin {
+  max-width: 550px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+
+/* MAIN SECTION */
+
+section {
+  transition: width .5s;
+  float: right;
+  width: 75%;
+}
+
+.inflation_header {
+
+}
+
+.article_title {
+  width: 640px;
+  font-size: 32px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  font-weight: 1000;
+  padding: 5px 20px 5px 0px;
+  margin: 20px 0px 20px 30px;
+  color: black;
+  display: block;
+  border-top: 5px solid black;
+  background: white;
+}
+
+#front_image_inflation, #front_image_confidence, #front_image_debt, #front_image_growth {
+  width: 640px;
+  height: 426px;
+  margin: 0 0px 0px 30px;
+  position: absolute;
+  z-index: -1;
+}
+
+#img-credit-report {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-BoE {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-loco-steve, #img-credit-Treasury {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-dover {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#select_dropdown {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  padding: 10px;
+  margin: 20px 0px 20px 30px;
+  width: 300px;
+  z-index: -1;
+}
+
+form {
+  width: 200px;
+  margin: 20px 25px 20px 35px;
+}
+
+#auto_text {
+  position: absolute;
+  width: 350px;
+  margin: 20px 10px 10px 320px;
+  font-size: 14px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 150%;
+}
+
+.indicator_botton:hover {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  color: white;
+  padding: 10px;
+  margin: 20px 25px 20px 35px;
+  width: 200px;
+  background-color: rgb(251, 16, 0);
+}
+
+.indicator_botton {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  color: white;
+  padding: 10px;
+  margin: 20px 25px 20px 35px;
+  width: 200px;
+  background-color: rgb(10, 35, 66);
+}
+
+article p {
+  width: 640px;
+  font-size: 16px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  padding: 5px 20px 5px 0px;
+  margin: 20px 0px 20px 30px;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 200%;
+}
+
+#article_growth {
+  width: 640px;
+  font-size: 16px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  padding: 5px 20px 5px 0px;
+  margin: 100px 0px 20px 30px;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 200%;
+}
+
+.article_sub {
+  font-weight: 2000;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+/* FOOTER */
+
+footer {
+  clear: both;
+  height: 150px;
+  margin-bottom: 0;
+  font-size: 22px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  font-weight: 1000;
+  background-color: rgb(10, 35, 66);
+  ;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+/* VISUALISATION STYLE */
+
+.bar {
+  fill: steelblue;
+}
+
+/*.line {
+  fill: none;
+  stroke: url("#line-gradient");
+  stroke-width: 2px;
+}*/
+
+.line {
+  fill: none;
+  stroke: url("#line-gradient");
+  stroke-width: 2px;
+}
+
+.line_business {
+  fill: none;
+  stroke: url("#line-gradient-business");
+  stroke-width: 2px;
+}
+
+.line_gdp, .line_cpih, .line_United_Kingdom, .line_balance {
+  fill: none;
+  stroke: blue;
+  stroke-width: 2px;
+}
+
+.line_services, .line_food, .line_UK, .line_Denmark, .line_exports {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+.line_income {
+  fill: none;
+  stroke: url("#line-gradient-inflation");
+  stroke-width: 2px;
+}
+
+.line_production, .line_alcohol, .line_OECD, .line_Finland, .line_imports {
+  fill: none;
+  stroke: orange;
+  stroke-width: 2px;
+}
+
+.line_manufacturing, .line_clothing, .line_EU, .line_Luxembourg {
+  fill: none;
+  stroke: green;
+  stroke-width: 2px;
+}
+
+.line_construction, .line_housing, .line_G7, .line_Netherlands {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.line_furniture, .line_Sweden {
+  fill: none;
+  stroke: purple;
+  stroke-width: 2px;
+}
+
+.line_health {
+  fill: none;
+  stroke: yellow;
+  stroke-width: 2px;
+}
+
+.line_transport {
+  fill: none;
+  stroke: brown;
+  stroke-width: 2px;
+}
+
+.line_communication {
+  fill: none;
+  stroke: grey;
+  stroke-width: 2px;
+}
+
+.line_recreation {
+  fill: none;
+  stroke: gold;
+  stroke-width: 2px;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip p {
+  background-color: white;
+  border: black 1px solid;
+  padding: 15px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#gdp, #cpih, #United_Kingdom, #balance {
+  color:blue;
+}
+
+#food, #services, #UK, #Denmark, #exports {
+  color:red;
+}
+
+#production, #alcohol, #OECD, #Finland, #imports {
+  color:orange;
+}
+
+#manufacturing, #clothing, #EU, #Luxembourg {
+  color:green;
+}
+
+#construction, #housing, #G7, #Netherlands, #business {
+  color:black;
+}
+
+#furniture, #Sweden {
+  color:purple;
+}
+
+#health {
+  color:yellow;
+}
+
+#transport {
+  color:brown;
+}
+
+#communication {
+  color:grey;
+}
+
+#recreation {
+  color:gold;
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+text {
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+}
+
+/*Bar Chart*/
+
+.bar {
+  fill: rgb(1, 73, 144);
+}
+
+.bar:hover {
+  fill: rgb(251, 16, 0);
+}
