@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% load i18n %}
+
+{% language 'es' %}
+
+{% block content %}
+
+{% image page.main_image original as card_image %}
+
+<div class="container mx-auto m-4">
+
+  <div class="row">
+<div class="col-sm-2">
+  </div>
+    <div class="col-sm-8">
+
+
+<div class="container" id="blog-page-topic"><i class="fas fa-caret-right"></i> {{ page.topic }}</div>
+    <h1 class="mt-4 border-top pt-5" id="blog-page-content">{{ page.title }}</h1>
+    <p class="meta" id="blog-page-content">{{ page.date|date:'d-M-Y H:i e' }}</p>
+    <div class="container" id="blog-page-social">
+    <a href="#" data-show-count="false"><i class="fab fa-twitter"></i></a><!--
+    --><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{% pageurl page %}" target="_blank"><i class="fab fa-facebook-f"></i></a><!--
+    --><a href="whatsapp://send" data-text="{{ page.title }}" data-href="http://127.0.0.1:8000{% pageurl page %}"><i class="fab fa-whatsapp"></i></a><!--
+    --><a onclick="copy_to_clipboard('http://127.0.0.1:8000/{% pageurl page %}')"><i class="fas fa-link"></i></a>
+    </div>
+    <div class="intro border-bottom py-4" id="blog-page-content">{{ page.intro }}</div>
+
+    <div class="container mt-4">
+
+      <img src="{{ card_image.url }}" class="w-100 border-0 rounded-0">
+
+      <figcaption class="figure-caption text-right">{{ page.caption_image }}</figcaption>
+      </div>
+
+
+    <div class="container my-5 py-5 border-top" id="blog-page-content">{{ page.body|richtext }}</div>
+    <p><a href="{{ page.get_parent.url }}" id="blog-page-content">Regresar a principal</a></p>
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+{% endlanguage %}

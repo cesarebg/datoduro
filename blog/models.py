@@ -36,6 +36,30 @@ class BlogIndexPage(Page):
         FieldPanel('intro', classname="full")
     ]
 
+class CvIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        cvpages = CvPage.objects.live().order_by('-first_published_at')
+        paginator = Paginator(cvpages, 10)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['cvpages'] = posts
+        return context
+
+        content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
 class NewsIndexPage(Page):
     intro = RichTextField(blank=True)
 
@@ -151,6 +175,37 @@ class BlogPage(Page):
         FieldPanel('category'),
         FieldPanel('topic'),
         InlinePanel('gallery_images', label="Gallery images"),
+    ]
+
+class CvPage(Page):
+    CATEGORIES = (
+        ('Experience', 'Experience'),
+        ('Education', 'Education'),
+        ('Portafolio', 'Portafolio')
+    )
+    date = models.DateTimeField("Post date")
+    start = models.DateTimeField("Start")
+    finish = models.DateTimeField("Finish")
+    intro = models.CharField(max_length=250)
+    body = RichTextField(blank=True)
+    category = models.CharField(max_length=10, choices=CATEGORIES, default="Blog")
+    topic = models.CharField(max_length=20, null = True)
+    paginate_by = 3
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        FieldPanel('start'),
+        FieldPanel('finish'),
+        FieldPanel('intro'),
+        FieldPanel('body', classname="full"),
+        FieldPanel('category'),
+        FieldPanel('topic'),
+        # InlinePanel('gallery_images', label="Gallery images"),
     ]
 
 class BlogPageGalleryImage(Orderable):
