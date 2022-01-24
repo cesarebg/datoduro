@@ -264,7 +264,7 @@ footer nav ul li a:hover {
 }
 
 #opinion-card-bg, #fig-caption-bg, #opinion-text-color, #opinion-text-color {
-  background-color: rgb(255, 195, 54) !important;
+  background-color: rgb(255, 255, 255) !important;
 }
 
 p.card-text.mt-3 {
