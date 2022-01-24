@@ -60,6 +60,78 @@ class CvIndexPage(Page):
         FieldPanel('intro', classname="full")
     ]
 
+class ExperienceIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        cvpages = CvPage.objects.live().order_by('-first_published_at')
+        paginator = Paginator(cvpages, 10)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['cvpages'] = posts
+        return context
+
+        content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
+class EducationIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        cvpages = CvPage.objects.live().order_by('-first_published_at')
+        paginator = Paginator(cvpages, 10)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['cvpages'] = posts
+        return context
+
+        content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
+class PortafolioIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        cvpages = CvPage.objects.live().order_by('-first_published_at')
+        paginator = Paginator(cvpages, 10)
+        page = request.GET.get("page")
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['cvpages'] = posts
+        return context
+
+        content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
 class NewsIndexPage(Page):
     intro = RichTextField(blank=True)
 
@@ -181,7 +253,8 @@ class CvPage(Page):
     CATEGORIES = (
         ('Experience', 'Experience'),
         ('Education', 'Education'),
-        ('Portafolio', 'Portafolio')
+        ('Portafolio', 'Portafolio'),
+        ('About me', 'About me')
     )
     date = models.DateTimeField("Post date")
     start = models.DateTimeField("Start")

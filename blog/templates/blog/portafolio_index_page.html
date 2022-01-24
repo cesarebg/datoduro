@@ -1,5 +1,13 @@
+<!-- {% extends "base.html" %} -->
+
 {% load static %}
-{% load wagtailcore_tags %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+
 <!doctype html>
     <html class="no-js" lang="">
 
@@ -41,30 +49,30 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-md fixed-top navbar-dark">
   <div class="container mx-auto">
-  <a class="navbar-brand" href="/">Dato>Duro_</a>
+  <a class="navbar-brand" href="/cbarboza">CESAR>BARBOZA_CV</a>
   <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/noticias" id="news-entry-menu">Noticias<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/cbarboza/experience" id="news-entry-menu">EXPERIENCE<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/opinion" id="opinion-menu">Opinión</a>
+        <a class="nav-link" href="/cbarboza/education" id="opinion-menu">EDUCATION</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/data" id="data-story-menu">Data</a>
+        <a class="nav-link" href="/cbarboza/portafolio" id="data-story-menu">PORTAFOLIO</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">En vivo</a>
       </li> -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
               <a class="nav-link" href="https://twitter.com/datoduromx" target="_blank"><i class="fab fa-twitter-square"></i></a>
       </li>
       <li class="nav-item">
               <a class="nav-link" href="https://www.facebook.com/datoduromx/" target="_blank"><i class="fab fa-facebook-square"></i></a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="https://github.com/datoduro" target="_blank"><i class="fab fa-github-square"></i></a>
       </li>
@@ -76,14 +84,60 @@
 </nav>
 {% endblock %}
 
-{% block content %}{% endblock %}
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col-md-8 infinite-container">
+
+      <h1>PORTAFOLIO</h1>
+
+      {% for post in cvpages %}
+      {% with post=post.specific %}
+      {% if post.category == 'Portafolio' %}
+
+      <!-- PORTAFOLIO CARD -->
+
+      <div class="card my-4 border-0 rounded-0 infinite-item" id="opinion-card">
+        <div class="card-body border-top bg-white" id="opinion-card-bg">
+          <div class="container clearfix">
+            <h1 class="card-title pt-4"><a href="http://127.0.0.1:8000{% pageurl post %}" id="opinion-text-color" class="float-left">{{ post.title }}</a></h1>
+
+            <p class="float-right topic"><i class="fas fa-caret-right"></i> {{ post.topic }}</p>
+          </div>
+          <p class="card-text"><small class="text-muted" id="opinion-text-color">{{ post.start|date:'M-Y' }}</small></p>
+
+          <p class="card-text">{{ post.body|richtext }}</p>
+        </div>
+      </div>
+
+      {% endif %}
+      {% endwith %}
+      {% endfor %}
+        <!-- {% image post.main_image original as card_image %}
+        <img src="{{ card_image.url }}" class="card-img border-0 rounded-0"> -->
+      </div>
+      <!-- {% if blogpages.has_next %}
+        <a class="infinite-more-link" href="?page={{ blogpages.next_page_number }}"></a>
+      {% endif %} -->
+    </div>
+    <!-- {% if blogpages.has_next %}
+      <a class="infinite-more-link" href="?page={{ articles.next_page_number }}">More</a>
+    {% endif %} -->
+  </div>
+
+
+
+
+{% endblock %}
 
 <footer>
 <div class="container ml-auto">
   <nav>
   <ul>
     <li>
-      <a href="/cbarboza" id="news-entry-menu">About me<span class="sr-only">(current)</span></a>
+      <a href="/noticias" id="news-entry-menu">About<span class="sr-only">(current)</span></a>
+    </li>
+    <li>
+      <a href="/opinion" id="opinion-menu">Contact</a>
     </li>
     <!-- <li>
       <a  href="/data" id="data-story-menu">Data</a>
