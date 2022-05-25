@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
@@ -47,18 +47,18 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', cast=bool)
+# DEBUG = config('DEBUG', cast=bool)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config("DATABASE_NAME"),
-        'USER': config("DATABASE_USER"),
-        'PASSWORD': config("DATABASE_PASSWORD"),
-        'HOST': '',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config("DATABASE_NAME"),
+#         'USER': config("DATABASE_USER"),
+#         'PASSWORD': config("DATABASE_PASSWORD"),
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
 
 # def get_env_variable(var_name):
 #     try:

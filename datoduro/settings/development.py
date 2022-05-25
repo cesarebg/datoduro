@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from .base import *
+from decouple import config
 
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 

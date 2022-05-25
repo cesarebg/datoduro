@@ -1,28 +1,18 @@
 # -*- coding: utf-8 -*-
-# from .base import *
-#
-# DEBUG = False
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config("DATABASE_NAME"),
-#         'USER': config("DATABASE_USER"),
-#         'PASSWORD': config("DATABASE_PASSWORD"),
-#         'HOST': '',
-#         'PORT': '',
-#     }
-# }
+from .base import *
+from decouple import config
 
+DEBUG = config('DEBUG', cast=bool)
 
+ALLOWED_HOSTS = ['*']
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': get_env_variable('DATABASE_NAME'),
-#         'USER': get_env_variable('DATABASE_USER'),
-#         'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
-#         'HOST': '',
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': '',
+        'PORT': '',
+    }
+}
